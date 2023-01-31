@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {shoppingItemsUrl} from "../ShoppingList";
+import {saveShoppingItem} from '../../../clients/shopping-items';
 
 type ShoppingListFormProps = {
-  fetchShoppingItemList: () => void
+  onSave: () => void
 }
 type FormState = {
   title: string
@@ -21,15 +21,9 @@ export const ShoppingListForm: React.FC<ShoppingListFormProps> = (props) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch(`${shoppingItemsUrl}`, {
-      method: 'POST',
-      body: JSON.stringify(formState),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json())
-      .then(_ => {
-        props.fetchShoppingItemList();
+    saveShoppingItem(JSON.stringify(formState))
+      .then(() => {
+        props.onSave();
       })
   }
 

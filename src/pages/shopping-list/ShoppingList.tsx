@@ -1,50 +1,75 @@
 import React, {useEffect, useState} from 'react';
-import {TitleComponent} from "../../components/title/Title.component";
-import {Link} from "react-router-dom";
-import {modalService} from "../../services/ModalService";
-import {ShoppingListForm} from "./components/ShoppingListForm";
+import {TitleComponent} from '../../components/title/Title.component';
+import {Link} from 'react-router-dom';
+import {modalService} from '../../services/ModalService';
+import {ShoppingListForm} from './components/ShoppingListForm';
+import {getShoppingItems} from '../../clients/shopping-items';
 
 type ShoppingListProps = {}
-export const shoppingItemsUrl = 'http://localhost:3001/items';
 
 type ShoppingListItem = {
   id: number;
   title: string;
 }
 
-export const ShoppingList: React.FC<ShoppingListProps> = (props) => {
-  const [itemList, setItemList] = useState<Array<ShoppingListItem> | undefined>();
+export const ShoppingList: React.FC<ShoppingListProps> = () => {
+  const [itemList, setItemList] = useState<Array<ShoppingListItem>>([]);
+  const [loadingState, setLoadingState] = useState<boolean>(true);
 
-  const fetchShoppingItemList = () => {
-    fetch(shoppingItemsUrl).then(res => res.json()).then(data => {
+  const loadShoppingItems = () => {
+    setLoadingState(true);
+    getShoppingItems().then(data => {
       setItemList(data as Array<ShoppingListItem>);
+      setLoadingState(false);
     })
   }
 
-  useEffect(()=>{
-    fetchShoppingItemList();
+  useEffect(() => {
+    // called twice on mount because of stric mode - only happens in development mode
+    console.log('loadShoppingItems');
+    loadShoppingItems();
   }, [])
 
   const fetchAndClose = () => {
-    fetchShoppingItemList();
+    loadShoppingItems();
     modalService.closeModal();
+  }
+
+  const openCreateModal = () => {
+    const createModalContent = (
+      <>
+        <ShoppingListForm onSave={fetchAndClose} />
+        <br/>
+        <button type="button" onClick={() => modalService.closeModal()}>Close</button>
+      </>
+    );
+    return modalService.openModal({ children: createModalContent });
+  }
+
+  const openEditModal = (item: ShoppingListItem) => {
+    const editModalContent = (
+      <>
+        <h1>Edit {item.title}</h1>
+        <button type="button" onClick={() => modalService.closeModal()}>Close</button>
+      </>
+    );
+    return modalService.openModal({ children: editModalContent });
   }
 
   return (
     <>
       <TitleComponent>ShoppingList</TitleComponent>
       <ul>
-        {!itemList ? 'loading' : itemList.map((item, i) => {
-          if(!item.title) return null;
-          return <li key={item.id}>
-            <Link to={item.title.toLowerCase()}>{item.title}</Link>
-            <button onClick={() => modalService.openModal({children: <h1>Edit {item.title} <br/> <button type="button" onClick={() => modalService.closeModal()}>Close</button></h1>})} type="button">Edit</button>
-          </li>
-        })}
+        {loadingState ? 'loading' : itemList.map(item => (
+          !item.title ? null : (
+            <li key={item.id}>
+              <Link to={item.title.toLowerCase()}>{item.title}</Link>
+              <button type="button" onClick={() => openEditModal(item)}>Edit</button>
+            </li>
+          )
+        ))}
       </ul>
-      <button type="button" onClick={()=>modalService.openModal({children: <><ShoppingListForm fetchShoppingItemList={fetchAndClose} /><br/> <button type="button" onClick={() => {
-          modalService.closeModal();
-        }}>Close</button></>})}>Add Item</button>
+      <button type="button" onClick={() => openCreateModal()}>Add Item</button>
     </>
   )
 }
