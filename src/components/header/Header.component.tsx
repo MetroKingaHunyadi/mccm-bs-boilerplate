@@ -1,7 +1,7 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink} from 'react-router-dom';
 import style from './Header.module.scss';
-import {classHelper} from "../../helpers/classHelper";
+import {classHelper} from '../../helpers/classHelper';
 
 type HeaderProps = {}
 

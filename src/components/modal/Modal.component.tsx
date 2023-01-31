@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import style from './Modal.module.scss';
-import {ModalContent, modalService} from "../../services/ModalService";
+import {ModalContent, modalService} from '../../services/ModalService';
 
 export const ModalComponent: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

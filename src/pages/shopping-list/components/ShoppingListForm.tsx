@@ -15,8 +15,8 @@ const initialFormState:FormState = {
 export const ShoppingListForm: React.FC<ShoppingListFormProps> = (props) => {
   const [formState, setFormState] = useState<FormState>(initialFormState);
 
-  const onInputChange = (title:string) => {
-    setFormState({title: title})
+  const onInputChange = (title: string) => {
+    setFormState({ title })
   }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

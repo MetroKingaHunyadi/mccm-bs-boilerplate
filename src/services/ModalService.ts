@@ -1,5 +1,5 @@
-import {Subject} from "rxjs";
-import React from "react";
+import {Subject} from 'rxjs';
+import React from 'react';
 
 const subject = new Subject();
 

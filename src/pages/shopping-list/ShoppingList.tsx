@@ -25,7 +25,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = () => {
   }
 
   useEffect(() => {
-    // called twice on mount because of stric mode - only happens in development mode
+    // called twice on mount because of strict mode - only happens in development mode
     console.log('loadShoppingItems');
     loadShoppingItems();
   }, [])
