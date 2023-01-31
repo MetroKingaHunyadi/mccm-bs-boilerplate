@@ -1,0 +1,16 @@
+.header {
+  background-color: lightblue;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  a {
+    text-decoration: none;
+    &:visited {
+      color: inherit;
+    }
+  }
+  a.active {
+    color: blueviolet;
+  }
+}

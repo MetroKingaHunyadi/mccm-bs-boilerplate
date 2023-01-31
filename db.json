@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "Tomato"
+    },
+    {
+      "id": 2,
+      "title": "Banana"
+    },
+    {
+      "id": 3,
+      "title": "Eggplant"
+    },
+    {
+      "title": "Chips",
+      "id": 4
+    },
+    {
+      "title": "Ketchup",
+      "id": 5
+    },
+    {
+      "title": "Ceva",
+      "id": 6
+    },
+    {
+      "title": "Inca ceva",
+      "id": 7
+    }
+  ]
+}
