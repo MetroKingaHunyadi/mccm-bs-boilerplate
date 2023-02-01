@@ -1,8 +1,8 @@
-export interface ShoppingListItem {
+export interface ShoppingItem {
     id: number;
     title: string;
 }
 
-export interface NewShoppingListItem {
+export interface NewShoppingItem {
     title: string;
 }

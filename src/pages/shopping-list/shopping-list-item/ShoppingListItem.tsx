@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useMatch } from 'react-router-dom';
 
-type ShoppingListItemProps = {}
+type ShoppingItemProps = {}
 
-export const ShoppingListItem: React.FC<ShoppingListItemProps> = (props) => {
+export const ShoppingItem: React.FC<ShoppingItemProps> = (props) => {
   const path = useMatch('shopping-list/:name');
   const name = path?.params.name ?? '';
 
