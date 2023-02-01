@@ -1,5 +1,5 @@
 import React from 'react';
-import {TitleComponent} from '../../components/title/Title.component';
+import { TitleComponent } from '../../components/title/Title.component';
 
 type HomeProps = {}
 

@@ -31,6 +31,14 @@
     {
       "title": "Melon",
       "id": 8
+    },
+    {
+      "title": "Cola",
+      "id": 9
+    },
+    {
+      "title": "Pepsi",
+      "id": 10
     }
   ]
 }

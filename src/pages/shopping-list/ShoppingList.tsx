@@ -1,37 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import {TitleComponent} from '../../components/title/Title.component';
-import {Link} from 'react-router-dom';
-import {modalService} from '../../services/ModalService';
-import {ShoppingListForm} from './components/ShoppingListForm';
-import {getShoppingItems} from '../../clients/shopping-items';
+import React, {useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-type ShoppingListProps = {}
+import { TitleComponent } from '../../components/title/Title.component';
+import { modalService } from '../../services/ModalService';
+import { ShoppingListForm } from './components/ShoppingListForm';
+import { RootState, useAppDispatch } from '../../store';
+import { fetchShoppingItems } from '../../store/shopping-items/actions';
+import { ShoppingListItem } from '../../models/shopping-items';
 
-type ShoppingListItem = {
-  id: number;
-  title: string;
-}
+type ShoppingListProps = {};
 
 export const ShoppingList: React.FC<ShoppingListProps> = () => {
-  const [itemList, setItemList] = useState<Array<ShoppingListItem>>([]);
-  const [loadingState, setLoadingState] = useState<boolean>(true);
-
-  const loadShoppingItems = () => {
-    setLoadingState(true);
-    getShoppingItems().then(data => {
-      setItemList(data as Array<ShoppingListItem>);
-      setLoadingState(false);
-    })
-  }
+  const dispatch = useAppDispatch();
+  const { list: itemList, loading: loadingState } = useSelector(
+    (state: RootState) => state.shoppingItems
+  );
 
   useEffect(() => {
     // called twice on mount because of strict mode - only happens in development mode
     console.log('loadShoppingItems');
-    loadShoppingItems();
+    dispatch(fetchShoppingItems());
   }, [])
 
   const fetchAndClose = () => {
-    loadShoppingItems();
     modalService.closeModal();
   }
 

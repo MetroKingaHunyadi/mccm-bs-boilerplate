@@ -1,30 +1,29 @@
-import React, {useState} from 'react';
-import {saveShoppingItem} from '../../../clients/shopping-items';
+import React, {useState } from 'react';
+
+import { NewShoppingListItem } from '../../../models/shopping-items';
+import { useAppDispatch } from '../../../store';
+import { createShoppingItem } from '../../../store/shopping-items/actions';
 
 type ShoppingListFormProps = {
-  onSave: () => void
-}
-type FormState = {
-  title: string
+  onSave: () => void;
 }
 
-const initialFormState:FormState = {
+const initialFormState: NewShoppingListItem = {
   title: ''
 }
 
 export const ShoppingListForm: React.FC<ShoppingListFormProps> = (props) => {
-  const [formState, setFormState] = useState<FormState>(initialFormState);
+  const dispatch = useAppDispatch();
+  const [formState, setFormState] = useState<NewShoppingListItem>(initialFormState);
 
   const onInputChange = (title: string) => {
-    setFormState({ title })
+    setFormState({ title });
   }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    saveShoppingItem(JSON.stringify(formState))
-      .then(() => {
-        props.onSave();
-      })
+    dispatch(createShoppingItem(formState));
+    props.onSave();
   }
 
   return (

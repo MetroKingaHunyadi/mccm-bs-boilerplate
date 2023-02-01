@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState } from 'react';
+
 import style from './Modal.module.scss';
-import {ModalContent, modalService} from '../../services/ModalService';
+import { ModalContent, modalService } from '../../services/ModalService';
 
 export const ModalComponent: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,10 +10,10 @@ export const ModalComponent: React.FC = () => {
   useEffect(()=>{
     const modalSubscription = modalService.modalSubscribe().subscribe(v => {
       if(v){
-        setChildren((v as ModalContent).children)
-        setIsOpen(true)
+        setChildren((v as ModalContent).children);
+        setIsOpen(true);
       } else {
-        setIsOpen(false)
+        setIsOpen(false);
       }
     })
     return () => {
@@ -21,6 +22,7 @@ export const ModalComponent: React.FC = () => {
   }, [])
 
   if(!isOpen) return null;
+
   return (
     <>
       <div className={`${style.modal} ${isOpen ? style.modalShow : style.modalHide}`}>

@@ -9,5 +9,5 @@ export const TitleComponent:React.FC<TitleComponentProps> = ({children}) => {
     <>
       <h1>{children}</h1>
     </>
-  )
+  );
 }
