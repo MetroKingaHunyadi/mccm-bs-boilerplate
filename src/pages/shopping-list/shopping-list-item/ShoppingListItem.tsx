@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link, useMatch } from 'react-router-dom';
 
-type ShoppingItemProps = {}
+type ShoppingListItemProps = {}
 
-export const ShoppingItem: React.FC<ShoppingItemProps> = (props) => {
+export const ShoppingListItem: React.FC<ShoppingListItemProps> = (props) => {
   const path = useMatch('shopping-list/:name');
   const name = path?.params.name ?? '';
 
-  useEffect(()=>{
+  useEffect(() => {
     // called twice on mount because of strict mode - only happens in development mode
     console.log('render')
     return () => {
