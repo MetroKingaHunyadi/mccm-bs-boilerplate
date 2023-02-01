@@ -1,8 +1,8 @@
-import { NewShoppingListItem, ShoppingListItem } from '../../models/shopping-items';
+import { NewShoppingItem, ShoppingItem } from '../../models/shopping-items';
 
 export const shoppingItemsUrl = 'http://localhost:3001/items';
 
-export const getShoppingItems = (): Promise<ShoppingListItem[]>  => (
+export const getShoppingItems = (): Promise<ShoppingItem[]>  => (
     fetch(shoppingItemsUrl)
         .then(res => res.json())
         .catch(err => {
@@ -11,7 +11,7 @@ export const getShoppingItems = (): Promise<ShoppingListItem[]>  => (
         })
 );
 
-export const saveShoppingItem = (data: NewShoppingListItem): Promise<ShoppingListItem | null> => (
+export const saveShoppingItem = (data: NewShoppingItem): Promise<ShoppingItem | null> => (
     fetch(shoppingItemsUrl, {
         method: 'POST',
         body: JSON.stringify(data),

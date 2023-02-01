@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ShoppingListItem } from '../../models/shopping-items';
+import { ShoppingItem } from '../../models/shopping-items';
 import { createShoppingItem, fetchShoppingItems } from './actions';
 
 type ShoppingListState = {
-  list: Array<ShoppingListItem>;
+  list: Array<ShoppingItem>;
   loading: boolean;
 }
 

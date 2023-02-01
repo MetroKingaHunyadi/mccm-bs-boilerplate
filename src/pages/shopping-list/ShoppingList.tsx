@@ -7,7 +7,7 @@ import { modalService } from '../../services/ModalService';
 import { ShoppingListForm } from './components/ShoppingListForm';
 import { RootState, useAppDispatch } from '../../store';
 import { fetchShoppingItems } from '../../store/shopping-items/actions';
-import { ShoppingListItem } from '../../models/shopping-items';
+import { ShoppingItem } from '../../models/shopping-items';
 
 type ShoppingListProps = {};
 
@@ -38,7 +38,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = () => {
     return modalService.openModal({ children: createModalContent });
   }
 
-  const openEditModal = (item: ShoppingListItem) => {
+  const openEditModal = (item: ShoppingItem) => {
     const editModalContent = (
       <>
         <h1>Edit {item.title}</h1>
