@@ -1,27 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import { TitleComponent } from '../../components/title/Title.component';
 import { modalService } from '../../services/ModalService';
 import { ShoppingListForm } from './components/ShoppingListForm';
-import { RootState, useAppDispatch } from '../../store';
-import { fetchShoppingItems } from '../../store/shopping-items/actions';
 import { ShoppingListItem } from '../../models/shopping-items';
+import { useShoppingListContext } from '../../context/shopping-list/shoppingListContext';
 
 type ShoppingListProps = {};
 
 export const ShoppingList: React.FC<ShoppingListProps> = () => {
-  const dispatch = useAppDispatch();
-  const { list: itemList, loading: loadingState } = useSelector(
-    (state: RootState) => state.shoppingItems
-  );
-
-  useEffect(() => {
-    // called twice on mount because of strict mode - only happens in development mode
-    console.log('loadShoppingItems');
-    dispatch(fetchShoppingItems());
-  }, [])
+  const { isLoading, shoppingList } = useShoppingListContext();
 
   const fetchAndClose = () => {
     modalService.closeModal();
@@ -52,7 +41,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = () => {
     <>
       <TitleComponent>ShoppingList</TitleComponent>
       <ul>
-        {loadingState ? 'loading' : itemList.map(item => (
+        {isLoading ? 'loading' : shoppingList.map(item => (
           !item.title ? null : (
             <li key={item.id}>
               <Link to={item.title.toLowerCase()}>{item.title}</Link>
