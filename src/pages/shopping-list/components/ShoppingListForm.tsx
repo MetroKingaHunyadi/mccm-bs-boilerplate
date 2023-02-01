@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 
 import { NewShoppingListItem } from '../../../models/shopping-items';
 import { useAppDispatch } from '../../../store';

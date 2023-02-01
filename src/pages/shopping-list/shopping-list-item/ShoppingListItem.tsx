@@ -1,4 +1,4 @@
-import React, {useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useMatch } from 'react-router-dom';
 
 type ShoppingListItemProps = {}

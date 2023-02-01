@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import style from './Modal.module.scss';
 import { ModalContent, modalService } from '../../services/ModalService';
