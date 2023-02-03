@@ -1,6 +1,7 @@
-# Scaffold Workshop Project
+# eSolutions Starter Project
 
-This is a custom CRA project built from the ground up for learning purposes and can be used as a starting template for
+This is a starter project created by eSolutions team.
+It is a custom CRA project built from the ground up for learning purposes and can be used as a starting template for
 future projects.
 
 ## Available Scripts
